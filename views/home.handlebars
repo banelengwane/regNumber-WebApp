@@ -1,0 +1,48 @@
+<meta charset="utf-8">
+<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+<meta name="viewport" content="width=device-width" />
+<title>Car registrations</title>
+<link rel="stylesheet" href="css/registration_number.css">
+<link rel="stylesheet" href="css/skeleton.css">
+
+<div class="container">
+    <div class="topNav">
+        <h1>Registration Numbers</h1>
+    </div>
+    <br />
+
+
+    <div class="row townText">
+        <span class="label-body">Registration</span>
+        <input type="text" name="" value="" placeholder="enter a registration " class="registration" id="registration" />
+
+    </div>
+    <div class="row buttons">
+        <button class="button-primary addRegsBtn" on type="submit" name="button">Add Registrations</button>
+    </div>
+    <br />
+    <div class="row theTowns">
+        <h4>Select a Town</h4>
+        <form action="/townSelect" method="POST"">
+            <select class="towns" name="towns" onchange="theChanger();">
+                <option value="alltowns">All Towns</option>
+                <option value="capetown">Cape Town</option>
+                <option value="bellville">Bellville</option>
+                <option value="paarl">Paarl</option>
+                <option value="george">George</option>
+            </select>
+        </form>
+    </div>
+    <br />
+    <div class="row buttons">
+        <button class="button-primary resetRegsBtn" on type="submit" name="button">Reset</button>
+    </div>
+    <br />
+    <div class="row displayArea">
+        <ul placeholder='your regs will display here'></ul>
+    </div>
+    <br />
+    <div class="row errors">
+        <p></p>
+    </div>
+</div>

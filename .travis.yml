@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+  - "v9.5.0"
+
+env:
+     - DATABASE_URL=postgresql://postgres@localhost/registrations
+    
+before_script:
+  - psql -c 'create database registrations;' -U postgres
+  - psql -U postgres -d registrations -a -f table.sql
+
+addons:
+    apt:
+    packages:
+    - postgresql-server-dev-9.2

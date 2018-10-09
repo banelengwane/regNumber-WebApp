@@ -1,0 +1,43 @@
+{
+  "name": "regNumber-WebApp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/mocha --reporter spec",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/banelengwane/regNumber-WebApp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/banelengwane/regNumber-WebApp/issues"
+  },
+  "homepage": "https://github.com/banelengwane/regNumber-WebApp#readme",
+  "devDependencies": {
+    "body-parser": "^1.18.3",
+    "eslint": "^5.6.1",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0"
+  },
+  "dependencies": {
+    "express": "^4.16.3",
+    "express-flash": "0.0.2",
+    "express-handlebars": "^3.0.0",
+    "express-session": "^1.15.6",
+    "mocha": "^5.2.0",
+    "moment": "^2.22.2",
+    "nodemon": "^1.18.4",
+    "pg": "^7.5.0"
+  }
+}
