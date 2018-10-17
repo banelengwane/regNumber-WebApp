@@ -10,39 +10,49 @@
         <h1>Registration Numbers</h1>
     </div>
     <br />
+    <div class="row app">
+        <form action="/regs" method="POST">
+            <div class="row townText">
 
+                <span class="label-body">Registration</span>
+                <input type="text" name="" value="" placeholder="enter a registration " class="registration" id="registration" />
 
-    <div class="row townText">
-        <span class="label-body">Registration</span>
-        <input type="text" name="" value="" placeholder="enter a registration " class="registration" id="registration" />
+            </div>
+            <div class="row buttons">
+                <button class="button-primary addRegsBtn" on type="submit" name="button">Add Registrations</button>
+            </div>
+            <br />
+            <div class="row theTowns">
+                <h4>Select a Town</h4>
+                <form class="/townSelect" name="post">
+                    <select class="towns" name="towns" >
+                        <option value="all">All Towns</option>
+                        <option value="capetown">Cape Town</option>
+                        <option value="bellville">Bellville</option>
+                        <option value="paarl">Paarl</option>
+                    </select>
+                </form>
+            </div>
 
-    </div>
-    <div class="row buttons">
-        <button class="button-primary addRegsBtn" on type="submit" name="button">Add Registrations</button>
-    </div>
-    <br />
-    <div class="row theTowns">
-        <h4>Select a Town</h4>
-        <form action="/townSelect" method="POST"">
-            <select class="towns" name="towns" onchange="theChanger();">
-                <option value="alltowns">All Towns</option>
-                <option value="capetown">Cape Town</option>
-                <option value="bellville">Bellville</option>
-                <option value="paarl">Paarl</option>
-                <option value="george">George</option>
-            </select>
+            <br />
+
+            <div class="row buttons">
+                <a class="reset" href="/clear"> Reset </a>  
+            </div>
         </form>
-    </div>
-    <br />
-    <div class="row buttons">
-        <button class="button-primary resetRegsBtn" on type="submit" name="button">Reset</button>
-    </div>
-    <br />
-    <div class="row displayArea">
-        <ul placeholder='your regs will display here'></ul>
-    </div>
-    <br />
-    <div class="row errors">
-        <p></p>
+
+        <br />
+
+        <div class="row displayArea">
+            {{#each numberPlate}}
+                <p class="reg">{{reg}}</p>
+            {{/each}}
+        </div>
+
+        <br />
+
+        <div class="row errors">
+            <p></p>
+        </div>
     </div>
 </div>

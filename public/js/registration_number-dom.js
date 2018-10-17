@@ -48,7 +48,15 @@ function theChanger () {
     while (displayArea.hasChildNodes()) {
         displayArea.removeChild(displayArea.firstChild);
     }
-    if (selectedTown.options[selectedTown.selectedIndex].value === 'capetown') { filter('capetown'); } else if (selectedTown.options[selectedTown.selectedIndex].value === 'bellville') { filter('bellville'); } else if (selectedTown.options[selectedTown.selectedIndex].value === 'paarl') { filter('paarl'); } else if (selectedTown.options[selectedTown.selectedIndex].value === 'alltowns') { filter('alltowns'); }
+    if (selectedTown.options[selectedTown.selectedIndex].value === 'capetown') {
+        filter('capetown');
+    } else if (selectedTown.options[selectedTown.selectedIndex].value === 'bellville') {
+        filter('bellville');
+    } else if (selectedTown.options[selectedTown.selectedIndex].value === 'paarl') {
+        filter('paarl');
+    } else if (selectedTown.options[selectedTown.selectedIndex].value === 'alltowns') {
+        filter('alltowns');
+    }
 }
 function reseter () {
     user.clearObj();

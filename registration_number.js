@@ -2,87 +2,65 @@ module.exports = function Registrator (pool) {
     async function regNumbers (reg) {
         reg = reg.toUpperCase();
 
-        let simplifiedReg = reg.replace(/\W/g, '');
-        let regEx = /^[A-Z]{2}\s[0-9]{3}(\-)[0-9]{3}$/;
-        let reg2 = /^[A-Z]{2}[0-9]{0,6}$/;
-
-        let knownRegistrations = ['CA', 'CY', 'CJ'];
-
-        if (reg2.test(simplifiedReg) && knownRegistrations.includes(simplifiedReg.substring(0, 2))) {
-            // Do The Things
-            // check if the reg is in the db...
-            const regCountResult = await pool.query('select count(*) from regsTb where regNumber = $1', [reg]);
-            const regCount = Number(regCountResult.rows[0].town_id);
-
-            if (regCount === 0) {
-            // if not there then lets add the registration number
-                await pool.query('insert into regTb(regNumber, town_id) values($1, 1)', [reg]);
-            } else {
-                console.log('error');
+        let startString = reg.split(' ', 1).join();
+        let currentTown = await pool.query('select id from towns where startStr = $1', [startString]);
+        
+        if (currentTown.rows.length === 1) {
+            let resultReg = await pool.query('select * from regsTb where regNumber = $1', [reg]);
+            
+            if (resultReg.rows.length === 0) {
+                await pool.query('select from regsTb(town_id, regNumber) values ($1,S2)', [currentTown[0].rows.id, reg]);
+            } else if (resultReg.rowCount > 0) {
+                return 'this reg has been added before';
             }
-
-            // if
+        } else {
+            return 'please enter reg in correct format';
         }
     }
 
-    async function whichTown (town) {
-        let allRegs = await pool.query()
-        var cpt = [];
-        var bel = [];
-        var par = [];
-        var all = [];
+    async function whichTown (startString) {
+        let cpt = {};
+        let bel = {};
+        let par = {};
+        let all = {};
 
-        // filter for cape town
-        if (town === 'capetown') {
-            for (let key in regObj) {
-                if (key.startsWith('CA')) {
-                    cpt.push(key);
-                }
-            }
-            return cpt;
+        // filter for all
+        if (startString === 'all') {
+            all = await pool.query('select regNumber from regsTB');
+            return all.rows;
         }
-        // filter for Bellville
-        if (town === 'bellville') {
-            for (let key in regObj) {
-                if (key.startsWith('CY')) {
-                    bel.push(key);
-                }
-            }
-            return bel;
+        // filter for capetown
+        if (startString === 'CA') {
+            cpt = await pool.query('select regNumber from regsTb join regsTb on regsTb.town_id=towns.id where startStr=$1', [startString]);
+            return cpt.rows;
         }
 
-        // filter for paarl
-        if (town === 'paarl') {
-            for (let key in regObj) {
-                if (key.startsWith('CJ')) {
-                    par.push(key);
-                }
-            }
-            return par;
+        // filter for paarl     
+        if (startString === 'CJ') {
+            par = await pool.query('select regNumber from regsTb join regsTb on regsTb.town_id=towns.id where startStr=$1', [startString]);
+            return par.rows;
         }
 
-        // filter for All
-        if (town === 'alltowns') {
-            for (let key in regObj) {
-                all.push(key);
-            }
-            return all;
+        // filter for bellville
+        if (startString === 'CY') {
+            bel = await pool.query('select regNumber from regsTb join regsTb on regsTb.town_id=towns.id where startStr=$1', [startString]);
+            return bel.rows;
         }
     }
-    function clearObj () {
-        //  return regObj = {};
+    async function clearRegs () {
+        await pool.query('delete from regsTb');
     }
 
     async function allRegs () {
-        let countRegs = await pool.query('select regNumber from regsTb');
-        let regs = countRegs.rows;
+        const countRegs = await pool.query('select regNumber from regsTb');
+        const regs = countRegs.rows;
         return regs;
     }
 
     return {
         whichTown,
         allRegs,
-        clearObj,
+        clearRegs,
         regNumbers
     };
 };

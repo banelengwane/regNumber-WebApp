@@ -13,14 +13,19 @@ const pool = new Pool({
 describe('The basic database web app', function () {
     beforeEach(async function () {
         // clean the tables before each test run
-        await pool.query('delete from towns;');
+        // await pool.query('delete from towns;');
         await pool.query('delete from regsTb;');
     });
 
-    it('should add registrations to the db', async function () {
+    it('should return all regs in db', async function () {
         let registration = Registrator(pool);
-        let set1 = await registration.regNumbers('ca 123');
-        assert.deepStrictEqual(await registration.allRegs(), [ { regNumber: 'ca 123' } ]);
+        await registration.regNumbers('CA 123-123');
+        await registration.regNumbers('CY 223-223');
+        await registration.regNumbers('CJ 992-992');
+
+        // console.log(await reg.InputReg('CA 123-123'));
+        
+        assert.deepStrictEqual(await registration.whichTown('all'), [ { regNumber: 'CA 123-123' } ]);
     });
     after(function () {
         pool.end();

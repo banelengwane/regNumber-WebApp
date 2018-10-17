@@ -4,7 +4,7 @@ let bodyParser = require('body-parser');
 let Moment = require('moment');
 let flash = require('express-flash');
 let session = require('express-session');
-// let routes = require('../routes/regRoutes');
+let routes = require('./routes/regRoutes');
 let pg = require('pg');
 let Pool = pg.Pool;
 
@@ -33,7 +33,7 @@ app.use(flash());
 
 const Registrator = require('./registration_number');
 const registrations = Registrator(pool);
-// const regRoutes = routes(registrations);
+const regRoutes = routes(registrations);
 
 // setting up handlebars
 let myhbp = exphbs.create({
@@ -65,6 +65,14 @@ app.use(bodyParser.json());
 
 // adding public folder
 app.use(express.static('public/'));
+
+app.get('/', regRoutes.home);
+
+app.post('/regs', regRoutes.home);
+
+app.get('/clear', regRoutes.clear);
+
+app.post('/townSelect', regRoutes.filtering);
 
 let PORT = process.env.PORT || 3016;
 
