@@ -24,8 +24,12 @@ describe('The basic database web app', function () {
         await registration.regNumbers('CJ 992-992');
 
         // console.log(await reg.InputReg('CA 123-123'));
-        
-        assert.deepStrictEqual(await registration.whichTown('all'), [ { regNumber: 'CA 123-123' } ]);
+
+        assert.deepStrictEqual(await registration.allRegs(),
+            [ { regNumber: 'CA 123-123' },
+                { regNumber: 'CY 223-223' },
+                { regNumber: 'CJ 992-992' }
+            ]);
     });
     after(function () {
         pool.end();

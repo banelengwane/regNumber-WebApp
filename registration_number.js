@@ -9,7 +9,7 @@ module.exports = function Registrator (pool) {
             let resultReg = await pool.query('select * from regsTb where regNumber = $1', [reg]);
             
             if (resultReg.rows.length === 0) {
-                await pool.query('select from regsTb(town_id, regNumber) values ($1,S2)', [currentTown[0].rows.id, reg]);
+                await pool.query('insert into regsTb(town_id, regNumber) values ($1,S2)', [currentTown.rows[0].id, reg]);
             } else if (resultReg.rowCount > 0) {
                 return 'this reg has been added before';
             }
