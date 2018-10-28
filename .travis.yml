@@ -3,11 +3,11 @@ node_js:
   - "v9.5.0"
 
 env:
-     - DATABASE_URL=postgresql://postgres@localhost/regTests
+     - DATABASE_URL=postgresql://postgres@localhost/registrations
     
 before_script:
-  - psql -c 'create database regTests;' -U postgres
-  - psql -U postgres -d regTests -a -f table.sql
+  - psql -c 'create database registrations;' -U postgres
+  - psql -U postgres -d registrations -a -f table.sql
 
 addons:
     apt:
