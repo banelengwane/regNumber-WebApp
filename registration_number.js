@@ -22,6 +22,7 @@ module.exports = function Registrator (pool) {
         let cpt = {};
         let bel = {};
         let par = {};
+        let geo = {};
         let all = {};
 
         // filter for all
@@ -31,20 +32,26 @@ module.exports = function Registrator (pool) {
         }
         // filter for capetown
         if (startString === 'CA') {
-            cpt = await pool.query('select regNumber from regsTb join regsTb on regsTb.town_id=towns.id where startStr=$1', [startString]);
+            cpt = await pool.query('select regNumber from towns join regsTb on regsTb.town_id=towns.id where startStr=$1', [startString]);
             return cpt.rows;
         }
 
         // filter for paarl     
         if (startString === 'CJ') {
-            par = await pool.query('select regNumber from regsTb join regsTb on regsTb.town_id=towns.id where startStr=$1', [startString]);
+            par = await pool.query('select regNumber from towns join regsTb on regsTb.town_id=towns.id where startStr=$1', [startString]);
             return par.rows;
         }
 
         // filter for bellville
         if (startString === 'CY') {
-            bel = await pool.query('select regNumber from regsTb join regsTb on regsTb.town_id=towns.id where startStr=$1', [startString]);
+            bel = await pool.query('select regNumber from towns join regsTb on regsTb.town_id=towns.id where startStr=$1', [startString]);
             return bel.rows;
+        }
+
+        // filter for george
+        if (startString === 'CAW') {
+            geo = await pool.query('select regNumber from towns join regsTb on regsTb.town_id=towns.id where startStr=$1', [startString]);
+            return geo.rows;
         }
     }
     async function clearRegs () {

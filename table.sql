@@ -16,3 +16,4 @@ create table regsTb(
 insert into towns (town, startStr) values ('cape town', 'CA');
 insert into towns (town, startStr) values ('bellville', 'CY');
 insert into towns (town, startStr) values ('paarl', 'CJ');
+insert into towns (town, startStr) values ('george', 'CAW');
