@@ -17,13 +17,13 @@ describe('The basic database web app', function () {
 
     it('should return all regs in db', async function () {
         let registration = Registrator(pool);
-        // await registration.regNumbers('CA 123-123');
-        // await registration.regNumbers('CY 45695');
+        await registration.regNumbers('CA 123-123');
+        await registration.regNumbers('CY 45695');
         await registration.regNumbers('CAW 123');
 
         assert.deepStrictEqual(await registration.allRegs(),
-            [ // { 'regnumber': 'CA 123-123' },
-                // { 'regnumber': 'CY 45695' },
+            [  { 'regnumber': 'CA 123-123' },
+                { 'regnumber': 'CY 45695' },
                 { 'regnumber': 'CAW 123' }
             ]);
     });
@@ -62,11 +62,25 @@ describe('The basic database web app', function () {
     it('should filter and return george registrations', async function () {
         let registration = Registrator(pool);
         await registration.regNumbers('CAW 123-123');
-        // await registration.regNumbers('CA 45695');
-        // await registration.regNumbers('CA 123');
+        await registration.regNumbers('CA 45695');
+        await registration.regNumbers('CA 123');
 
         assert.deepEqual(await registration.whichTown('CAW'),
             [ { 'regnumber': 'CAW 123-123' } ]);
+    });
+
+    it('should return messages for registrations from other towns', async function () {
+        let registration = Registrator(pool);
+
+        assert.deepEqual(await registration.regNumbers('ND 7898'),
+            'Enter a Registration number from: CA, CAW, CY and/or CJ');
+    });
+
+    it('should return messages for non-strings', async function () {
+        let registration = Registrator(pool);
+
+        assert.deepEqual(await registration.regNumbers(123),
+            'Please enter a valid Registration Number');
     });
     after(function () {
         pool.end();

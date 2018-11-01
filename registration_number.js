@@ -1,20 +1,23 @@
 module.exports = function Registrator (pool) {
     async function regNumbers (reg) {
-        reg = reg.toUpperCase();
+        if (typeof reg === 'string' || reg instanceof String) {
+            reg = reg.toUpperCase();
+            let startString = reg.split(' ', 1).join();
+            let currentTown = await pool.query('select id from towns where startStr = $1', [startString]);
 
-        let startString = reg.split(' ', 1).join();
-        let currentTown = await pool.query('select id from towns where startStr = $1', [startString]);
-        
-        if (currentTown.rows.length === 1) {
-            let resultReg = await pool.query('select * from regsTb where regNumber = $1', [reg]);
-            
-            if (resultReg.rows.length === 0) {
-                await pool.query('insert into regsTb(town_id, regNumber) values ($1, $2)', [currentTown.rows[0].id, reg]);
-            } else if (resultReg.rowCount > 0) {
-                return 'this reg has been added before';
+            if (currentTown.rows.length === 1) {
+                let resultReg = await pool.query('select * from regsTb where regNumber = $1', [reg]);
+
+                if (resultReg.rows.length === 0) {
+                    await pool.query('insert into regsTb(town_id, regNumber) values ($1, $2)', [currentTown.rows[0].id, reg]);
+                } else if (resultReg.rowCount > 0) {
+                    return 'this reg has been added before';
+                }
+            } else {
+                return 'Enter a Registration number from: CA, CAW, CY and/or CJ';
             }
         } else {
-            return 'please enter reg in correct format';
+            return 'Please enter a valid Registration Number';
         }
     }
 
@@ -27,7 +30,7 @@ module.exports = function Registrator (pool) {
 
         // filter for all
         if (startString === 'all') {
-            all = await pool.query('select regNumber from regsTB');
+            all = allRegs();
             return all.rows;
         }
         // filter for capetown
@@ -36,7 +39,7 @@ module.exports = function Registrator (pool) {
             return cpt.rows;
         }
 
-        // filter for paarl     
+        // filter for paarl
         if (startString === 'CJ') {
             par = await pool.query('select regNumber from towns join regsTb on regsTb.town_id=towns.id where startStr=$1', [startString]);
             return par.rows;
