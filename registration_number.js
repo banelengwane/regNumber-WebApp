@@ -11,7 +11,7 @@ module.exports = function Registrator (pool) {
                 if (resultReg.rows.length === 0) {
                     await pool.query('insert into regsTb(town_id, regNumber) values ($1, $2)', [currentTown.rows[0].id, reg]);
                 } else if (resultReg.rowCount > 0) {
-                    return 'this reg has been added before';
+                    return 'This registration has been added before';
                 }
             } else {
                 return 'Enter a Registration number from: CA, CAW, CY and/or CJ';

@@ -69,6 +69,13 @@ describe('The basic database web app', function () {
             [ { 'regnumber': 'CAW 123-123' } ]);
     });
 
+    it('should return messages for registrations added more than once', async function () {
+        let registration = Registrator(pool);
+        await registration.regNumbers('CA 123')
+        assert.deepEqual(await registration.regNumbers('CA 123'),
+            'This registration has been added before');
+    });
+
     it('should return messages for registrations from other towns', async function () {
         let registration = Registrator(pool);
 
