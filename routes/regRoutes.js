@@ -9,11 +9,11 @@ module.exports = function regRoutes (registration) {
             // ERR
         }
     }
-    
+
     async function regs (req, res) {
         let userReg = req.body.regField;
         try {
-            let numPlate = await registration.regNumber(userReg);
+            let numPlate = await registration.regNumbers(userReg);
             res.render('home', {
                 numberPlates: await registration.allRegs(), regNum: numPlate
             });
