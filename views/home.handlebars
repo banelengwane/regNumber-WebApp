@@ -19,7 +19,7 @@
 
             </div>
             <div class="row buttons">
-                <button class="button-primary addRegsBtn" on type="submit" name="button">Add Registrations</button>
+                <button class="button-primary addRegsBtn" type="submit" name="button">Add Registrations</button>
             </div>
             <br />
             <div class="row theTowns">
@@ -35,15 +35,15 @@
             <br />
 
             <div class="row buttons">
-                <a class="reset" href="/clear"> Reset </a>  
+                <a class="reset" href="/clear"> Reset </a>
             </div>
         </form>
 
         <br />
 
         <div class="row displayArea">
-            {{#each numberPlates}}
-                <p class="reg">{{regNum}}</p>
+            {{#each numberPlates as |value|}}
+                <p class="reg">{{value.regnumber}}</p>
             {{/each}}
         </div>
 

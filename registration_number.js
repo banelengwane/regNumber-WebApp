@@ -63,8 +63,7 @@ module.exports = function Registrator (pool) {
 
     async function allRegs () {
         const countRegs = await pool.query('select regNumber from regsTb');
-        const regs = countRegs.rows;
-        return regs;
+        return countRegs.rows;
     }
 
     return {
