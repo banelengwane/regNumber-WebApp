@@ -1,6 +1,6 @@
 module.exports = function regRoutes (registration) {
     // test the route
-    async function home (req, res) {
+    async function one (req, res) {
         try {
             res.render('home', {
                 numberPlates: await registration.allRegs()
@@ -9,10 +9,22 @@ module.exports = function regRoutes (registration) {
             // ERR
         }
     }
+    
+    async function regs (req, res) {
+        let userReg = req.body.regField;
+        try {
+            let numPlate = await registration.regNumber(userReg);
+            res.render('home', {
+                numberPlates: await registration.allRegs(), regNum: numPlate
+            });
+        } catch (err) {
+            // ERR
+        }
+    }
 
     async function filtering (req, res) {
         try {
-            let town = req.body.towns;
+            let town = req.params.town;
             console.log(town);
             res.render('home', {
                 numberPlates: await registration.whichTown(town)
@@ -31,7 +43,8 @@ module.exports = function regRoutes (registration) {
         }
     }
     return {
-        home,
+        regs,
+        one,
         filtering,
         clear
     };

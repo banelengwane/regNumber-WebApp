@@ -66,13 +66,13 @@ app.use(bodyParser.json());
 // adding public folder
 app.use(express.static('public/'));
 
-app.get('/', regRoutes.home);
+app.get('/', regRoutes.one);
 
-app.post('/regs', regRoutes.home);
+app.post('/regs', regRoutes.regs);
 
 app.get('/clear', regRoutes.clear);
 
-app.post('/townSelect', regRoutes.filtering);
+app.post('/regs:town', regRoutes.filtering);
 
 let PORT = process.env.PORT || 3016;
 

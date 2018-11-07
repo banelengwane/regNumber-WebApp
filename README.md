@@ -1,0 +1,1 @@
+[![Build Status](https://travis-ci.org/banelengwane/regNumber-WebApp.svg?branch=master)](https://travis-ci.org/banelengwane/regNumber-WebApp)

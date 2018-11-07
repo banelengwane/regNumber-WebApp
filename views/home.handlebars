@@ -15,7 +15,7 @@
             <div class="row townText">
 
                 <span class="label-body">Registration</span>
-                <input type="text" name="" value="" placeholder="enter a registration " class="registration" id="registration" />
+                <input type="text" name="regField" value="" placeholder="enter a registration " class="registration" id="registration" />
 
             </div>
             <div class="row buttons">
@@ -23,16 +23,13 @@
             </div>
             <br />
             <div class="row theTowns">
-                <h4>Select a Town</h4>
-                <form class="/townSelect" name="post">
-                    <select class="towns" name="towns" >
-                        <option value="all">All Towns</option>
-                        <option value="capetown">Cape Town</option>
-                        <option value="bellville">Bellville</option>
-                        <option value="paarl">Paarl</option>
-                        <option value="george">George</option>
-                    </select>
-                </form>
+                <select class="/regs:town" name="towns" >
+                    <option value="all">All Towns</option>
+                    <option value="CA">Cape Town</option>
+                    <option value="CY">Bellville</option>
+                    <option value="CJ">Paarl</option>
+                    <option value="CAW">George</option>
+                </select>
             </div>
 
             <br />
@@ -46,7 +43,7 @@
 
         <div class="row displayArea">
             {{#each numberPlates}}
-                <p class="reg">{{reg}}</p>
+                <p class="reg">{{regNum}}</p>
             {{/each}}
         </div>
 
