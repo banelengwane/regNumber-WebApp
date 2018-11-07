@@ -9,11 +9,11 @@ module.exports = function regRoutes (registration) {
             // ERR
         }
     }
-    
+
     async function regs (req, res) {
         let userReg = req.body.regField;
         try {
-            await registration.regNumber(userReg);
+            let numPlate = await registration.regNumbers(userReg);
             res.render('home', {
                 numberPlates: await registration.allRegs()
             });
@@ -23,11 +23,13 @@ module.exports = function regRoutes (registration) {
     }
 
     async function filtering (req, res) {
+        let town = req.body.town;
+            
         try {
-            let town = req.params.town;
-            console.log(town);
+            let numPlate = await registration.whichTown(town);
+            console.log(numPlate);
             res.render('home', {
-                numberPlates: await registration.whichTown(town)
+                numberPlates: numPlate
             });
         } catch (err) {
             // err

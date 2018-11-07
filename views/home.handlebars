@@ -19,11 +19,16 @@
 
             </div>
             <div class="row buttons">
-                <button class="button-primary addRegsBtn" on type="submit" name="button">Add Registrations</button>
+                <button class="button-primary addRegsBtn" type="submit" name="button">Add Registrations</button>
             </div>
             <br />
+        
+        </form>
+
+        <br />
+        <form action="/regs:town" method="post">
             <div class="row theTowns">
-                <select class="/regs:town" name="towns" >
+                <select class="town" name="town" >
                     <option value="all">All Towns</option>
                     <option value="CA">Cape Town</option>
                     <option value="CY">Bellville</option>
@@ -33,17 +38,17 @@
             </div>
 
             <br />
-
             <div class="row buttons">
-                <a class="reset" href="/clear"> Reset </a>  
+                <button class="button-primary addRegsBtn" type="submit" name="button">Filter</button>
+            </div>
+            <div class="row buttons">
+                <a class="reset" href="/clear"> Reset </a>
             </div>
         </form>
 
-        <br />
-
         <div class="row displayArea">
-            {{#each numberPlates}}
-                <p class="regis">{{reg}}</p>
+            {{#each numberPlates as |value|}}
+                <p class="reg">{{value.regnumber}}</p>
             {{/each}}
         </div>
 
