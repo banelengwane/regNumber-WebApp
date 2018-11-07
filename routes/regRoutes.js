@@ -13,9 +13,9 @@ module.exports = function regRoutes (registration) {
     async function regs (req, res) {
         let userReg = req.body.regField;
         try {
-            let numPlate = await registration.regNumber(userReg);
+            await registration.regNumber(userReg);
             res.render('home', {
-                numberPlates: await registration.allRegs(), regNum: numPlate
+                numberPlates: await registration.allRegs()
             });
         } catch (err) {
             // ERR
