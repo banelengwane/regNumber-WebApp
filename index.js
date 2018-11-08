@@ -3,7 +3,6 @@ let exphbs = require('express-handlebars');
 let bodyParser = require('body-parser');
 let Moment = require('moment');
 let flash = require('express-flash');
-let session = require('express-session');
 let routes = require('./routes/regRoutes');
 let pg = require('pg');
 let Pool = pg.Pool;
