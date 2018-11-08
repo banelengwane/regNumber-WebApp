@@ -7,7 +7,7 @@
 
 <div class="container">
     <div class="topNav">
-        <h1>Registration Numbers</h1>
+        <h1>Registration Web App</h1>
     </div>
     <br />
     <div class="row app">
@@ -20,9 +20,7 @@
             </div>
             <div class="row buttons">
                 <button class="button-primary addRegsBtn" type="submit" name="button">Add Registrations</button>
-            </div>
-            <br />
-        
+            </div>        
         </form>
 
         <br />
@@ -47,8 +45,8 @@
         </form>
 
         <div class="row displayArea">
-            {{#each numberPlates as |value|}}
-                <p class="reg">{{value.regnumber}}</p>
+            {{#each numberPlates}}
+               <li class="reg">{{regnumber}}</li>
             {{/each}}
         </div>
 

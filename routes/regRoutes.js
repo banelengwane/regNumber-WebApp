@@ -27,7 +27,6 @@ module.exports = function regRoutes (registration) {
             
         try {
             let numPlate = await registration.whichTown(town);
-            console.log(numPlate);
             res.render('home', {
                 numberPlates: numPlate
             });

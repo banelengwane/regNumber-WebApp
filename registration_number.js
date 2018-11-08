@@ -22,40 +22,10 @@ module.exports = function Registrator (pool) {
     }
 
     async function whichTown (startString) {
-        let cpt = {};
-        let bel = {};
-        let par = {};
-        let geo = {};
-        let all = {};
+        if (startString === 'all') return allRegs();
 
-        // filter for all
-        if (startString === 'all') {
-            all = allRegs();
-            return all.rows;
-        }
-        // filter for capetown
-        if (startString === 'CA') {
-            cpt = await pool.query('select regNumber from towns join regsTb on regsTb.town_id=towns.id where startStr=$1', [startString]);
-            return cpt.rows;
-        }
-
-        // filter for paarl
-        if (startString === 'CJ') {
-            par = await pool.query('select regNumber from towns join regsTb on regsTb.town_id=towns.id where startStr=$1', [startString]);
-            return par.rows;
-        }
-
-        // filter for bellville
-        if (startString === 'CY') {
-            bel = await pool.query('select regNumber from towns join regsTb on regsTb.town_id=towns.id where startStr=$1', [startString]);
-            return bel.rows;
-        }
-
-        // filter for george
-        if (startString === 'CAW') {
-            geo = await pool.query('select regNumber from towns join regsTb on regsTb.town_id=towns.id where startStr=$1', [startString]);
-            return geo.rows;
-        }
+        let data = await pool.query('select regNumber from towns join regsTb on regsTb.town_id=towns.id where startStr=$1', [startString]);
+        return data.rows;
     }
     async function clearRegs () {
         await pool.query('delete from regsTb');
