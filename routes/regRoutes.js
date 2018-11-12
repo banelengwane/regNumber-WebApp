@@ -10,13 +10,18 @@ module.exports = function regRoutes (registration) {
         }
     }
 
-    async function regs (req, res) {
+    async function regs (req, res, next) {
         let userReg = req.body.regField;
         try {
             let numPlate = await registration.regNumbers(userReg);
-            res.render('home', {
-                numberPlates: await registration.allRegs()
-            });
+            if (typeof numPlate === 'string') {
+                req.flash('error', numPlate);
+                res.redirect('/');
+            } else {
+                res.render('home', {
+                    numberPlates: await registration.allRegs()
+                });
+            }
         } catch (err) {
             // ERR
         }
@@ -24,12 +29,17 @@ module.exports = function regRoutes (registration) {
 
     async function filtering (req, res) {
         let town = req.body.town;
-            
         try {
             let numPlate = await registration.whichTown(town);
-            res.render('home', {
-                numberPlates: numPlate
-            });
+            console.log(numPlate.length);
+            if (numPlate.length === 0) {
+                req.flash('error', 'There are no registrations to filter');
+                res.redirect('/');
+            } else {
+                res.render('home', {
+                    numberPlates: numPlate
+                });
+            }
         } catch (err) {
             // err
         }

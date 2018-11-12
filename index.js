@@ -1,11 +1,12 @@
-let express = require('express');
-let exphbs = require('express-handlebars');
-let bodyParser = require('body-parser');
-let Moment = require('moment');
-let flash = require('express-flash');
-let routes = require('./routes/regRoutes');
-let pg = require('pg');
-let Pool = pg.Pool;
+const express = require('express');
+const exphbs = require('express-handlebars');
+const bodyParser = require('body-parser');
+const Moment = require('moment');
+const flash = require('express-flash');
+const session = require('express-session');
+const routes = require('./routes/regRoutes');
+const pg = require('pg');
+const Pool = pg.Pool;
 
 // should we use a SSL connection
 let useSSL = false;
@@ -22,13 +23,6 @@ const pool = new Pool({
 });
 
 let app = express();
-
-app.use(session({
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: true
-}));
-app.use(flash());
 
 const Registrator = require('./registration_number');
 const registrations = Registrator(pool);

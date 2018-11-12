@@ -11,6 +11,10 @@
     </div>
     <br />
     <div class="row app">
+        <div class="error">
+            <h5>{{messages.error}}</h5>
+        </div> 
+
         <form action="/regs" method="POST">
             <div class="row townText">
 
@@ -50,10 +54,6 @@
             {{/each}}
         </div>
 
-        <br />
-
-        <div class="row errors">
-            <p></p>
-        </div>
+        <br />     
     </div>
 </div>
