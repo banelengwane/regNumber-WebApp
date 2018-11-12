@@ -1,0 +1,22 @@
+{
+    "name": "registration-webApp",
+    "description": "",
+    "scripts": {
+    },
+    "env": {
+    },
+    "formation": {
+      "web": {
+        "quantity": 1
+      }
+    },s
+    "addons": [
+    
+    ],
+    "buildpacks": [
+      {
+        "url": "heroku/nodejs"
+      }
+    ]
+    }
+    
