@@ -9,7 +9,7 @@
       "web": {
         "quantity": 1
       }
-    },s
+    },
     "addons": [
     
     ],
@@ -18,5 +18,5 @@
         "url": "heroku/nodejs"
       }
     ]
-    }
+}
     
