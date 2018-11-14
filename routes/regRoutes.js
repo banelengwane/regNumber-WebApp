@@ -31,9 +31,8 @@ module.exports = function regRoutes (registration) {
         let town = req.body.town;
         try {
             let numPlate = await registration.whichTown(town);
-            console.log(numPlate.length);
             if (numPlate.length === 0) {
-                req.flash('error', 'There are no registrations to filter');
+                req.flash('error2', 'There are no registrations to filter');
                 res.redirect('/');
             } else {
                 res.render('home', {

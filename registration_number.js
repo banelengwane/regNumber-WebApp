@@ -1,7 +1,9 @@
 module.exports = function Registrator (pool) {
     async function regNumbers (reg) {
-        if (typeof reg === 'string' || reg instanceof String) {
-            reg = reg.toUpperCase();
+        reg = reg.toUpperCase();
+        let longFormat = /^[A-Z]{2,3}\s[0-9]{3}(\-)[0-9]{3}$/;
+        let shortFormat = /^[A-Z]{2,3}\s[0-9]{6}$/;
+        if (longFormat.test(reg) || shortFormat.test(reg)) {
             let startString = reg.split(' ', 1).join();
             let currentTown = await pool.query('select id from towns where startStr = $1', [startString]);
 
@@ -17,7 +19,7 @@ module.exports = function Registrator (pool) {
                 return 'Enter a Registration number from: CA, CAW, CY and/or CJ';
             }
         } else {
-            return 'Please enter a valid Registration Number';
+            return 'Enter a Registration as required: CA 123456/CA 123-456';
         }
     }
 

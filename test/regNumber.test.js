@@ -17,12 +17,12 @@ describe('The basic database web app', function () {
 
     it('should return all regs in db', async function () {
         let registration = Registrator(pool);
-        await registration.regNumbers('CA 123-123');
+        await registration.regNumbers('CA 1');
         await registration.regNumbers('CY 45695');
         await registration.regNumbers('CAW 123');
 
         assert.deepStrictEqual(await registration.allRegs(),
-            [  { 'regnumber': 'CA 123-123' },
+            [  { 'regnumber': 'CA 1' },
                 { 'regnumber': 'CY 45695' },
                 { 'regnumber': 'CAW 123' }
             ]);

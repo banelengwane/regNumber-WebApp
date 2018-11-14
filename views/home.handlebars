@@ -11,15 +11,15 @@
     </div>
     <br />
     <div class="row app">
-        <div class="error">
-            <h5>{{messages.error}}</h5>
+        <div class="row error">
+            <h6>{{messages.error}}</h6>
         </div> 
 
         <form action="/regs" method="POST">
             <div class="row townText">
 
                 <span class="label-body">Registration</span>
-                <input type="text" name="regField" value="" placeholder="enter a registration " class="registration" id="registration" />
+                <input type="text" name="regField" value="" placeholder="e.g CA 123456/CA 123-456" class="registration" id="registration" />
 
             </div>
             <div class="row buttons">
@@ -28,6 +28,9 @@
         </form>
 
         <br />
+        <div class="row error2">
+            <h6>{{messages.error2}}</h6>
+        </div> 
         <form action="/regs:town" method="post">
             <div class="row theTowns">
                 <select class="town" name="town" >
